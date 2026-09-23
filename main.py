@@ -33,7 +33,7 @@ cus_df['RFM_Score'] = (
 #Create Customer Segments
 cus_df['R_Score'] = cus_df['R_Score'].astype(int)
 cus_df['F_Score'] = cus_df['F_Score'].astype(int)
-cus_df['M_Score'] = cus_df['M_Score'].astype(int)
+cus_df['M_score'] = cus_df['M_Score'].astype(int)
 
 def assign_segment(row):
         R, F, M = row['R_Score'], row['F_Score'], row['M_Score']
@@ -85,7 +85,7 @@ segment_summary = segment_summary[[
 
 segment_summary = segment_summary.sort_values('Total_Revenue', ascending=False)
 segment_summary = segment_summary.round(2)
-#print(segment_summary)
+print(segment_summary)
 
 # Pareto analysis
 pareto = cus_df[['Customer_ID', 'Monetary']].sort_values('Monetary', ascending=False).reset_index(drop=True)
@@ -131,8 +131,16 @@ coho_df['Period_Number']=(coho_df['Purchase_Month']-coho_df['First_Purchase_Mont
 coho_data = coho_df.groupby(['First_Purchase_Month', 'Period_Number'])['Customer_ID'].nunique().reset_index()
 coho_pivot = coho_data.pivot(index='First_Purchase_Month',columns='Period_Number', values='Customer_ID')
 
-fpm_jan=coho_data[coho_data['First_Purchase_Month'] == '2024-01']
-fpm_jan['Retention']=fpm_jan['Customer_ID']/20 * 100
-fpm_jan['Retention']=fpm_jan['Retention'].round(2)
-fpm_pivot=fpm_jan.pivot(index='First_Purchase_Month',columns='Period_Number',values='Retention')
-print(fpm_pivot)
+retention_rows = []
+
+for cohort_month in coho_data['First_Purchase_Month'].unique():
+        cohort_subset = coho_data[coho_data['First_Purchase_Month'] == cohort_month].copy()
+        # Period 0 value = cohort size for this specific month
+        cohort_size = cohort_subset[cohort_subset['Period_Number'] == 0]['Customer_ID'].values[0]
+        cohort_subset['Retention'] = (cohort_subset['Customer_ID'] / cohort_size * 100).round(2)
+        retention_rows.append(cohort_subset)
+retention_df = pd.concat(retention_rows)
+retention_pivot = retention_df.pivot(index='First_Purchase_Month', columns='Period_Number', values='Retention')
+print(retention_pivot)
+
+print(segment_summary)

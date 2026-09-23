@@ -14,3 +14,25 @@ ax2.set_ylabel('Cumulative % of Revenue', color='darkorange')
 plt.title('Pareto Analysis: Revenue Concentration by Customer')
 plt.tight_layout()
 plt.show()
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12, 8))
+
+sns.heatmap(
+            retention_pivot,
+            annot=True,          # show the % values in each cell
+            fmt='.1f',           # 1 decimal place
+            cmap='YlGnBu',       # yellow (low) → green → blue (high) — classic cohort look
+            vmin=0, vmax=100,    # fix color scale 0-100% so cohorts compare fairly
+            linewidths=0.5,
+            linecolor='white',
+            cbar_kws={'label': 'Retention %'}
+                                        )
+
+plt.title('Customer Retention Cohort Analysis', fontsize=14, pad=12)
+plt.xlabel('Months Since First Purchase (Period Number)')
+plt.ylabel('First Purchase Month (Cohort)')
+plt.tight_layout()
+plt.show()

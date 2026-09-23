@@ -1,0 +1,11 @@
+
+. High-value customers
+Champions and Big Spenders account for 60.49% of historical revenue while representing 33.33% of active customers.
+2. Champions
+Champions generate 31.79% of revenue from only 16.09% of active customers, indicating disproportionately high historical customer value.
+3. Customer concentration
+The top 10% of customers contribute 29.66% of total revenue, showing meaningful revenue concentration among high-value customers.
+4. Low-value segment
+Lost / Low Value customers represent 16.09% of active customers but contribute only 3.63% of revenue.
+5. Retention
+Cohort retention declines as customers move further from their first purchase, with some later-period recovery indicating that customers can return after inactive months.

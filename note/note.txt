@@ -1,0 +1,160 @@
+Frequency	How many transactions did they make?
+Monetary	How much revenue did they generate?
+First Purchase	When did they first purchase?
+Last Purchase	When did they last purchase?
+Total Quantity	How many products did they buy?
+
+Calculate Recency
+Recency = Overall Latest Date − Last Purchase
+
+create the three RFM dimensions:
+R — Recency
+How recently did the customer purchase?
+Lower = better
+F — Frequency
+How often did they purchase?
+Higher = better
+M — Monetary
+How much did they spend?
+Higher = better
+
+Create Customer Segments
+Segment		RFM pattern
+Champions	R ≥ 4, F ≥ 4, M ≥ 4
+Loyal Customers	R ≥ 3, F ≥ 4
+Big Spenders	M ≥ 4
+At Risk		R ≤ 2, F ≥ 3
+Need Attention	R = 3
+Lost/Low Value	R ≤ 2, F ≤ 2, M ≤ 2
+
+Segment Revenue Analysis
+
+Segment quality check
+Customer count
+Total revenue
+Average revenue per customer
+Average Recency
+Average Frequency
+Average Monetary
+Average revenue per customer = Total Revenue / Customer Count
+
+Pareto Analysis(80 20 rule<80% of effects come from 20% causes>)
+<<<How concentrated is our revenue among customers?
+Do roughly 20% of customers generate roughly 80% of revenue?>>>
+Sort customers by Monetary, highest → lowest.
+Calculate cumulative revenue.
+	Cumulative_Revenue[i] = Monetary[i] + Cumulative_Revenue[i-1]
+Calculate cumulative percentage of total revenue.
+	Cumulative_Pct_Revenue[i] = (Cumulative_Revenue[i] / Total_Revenue) × 100
+Calculate cumulative percentage of customers.
+	Cumulative_Pct_Customers[i] = (Rank[i] / Total_Customers) × 100
+
+Customer Retention / Cohort Analysis
+step 1 From your Customers data, create:Signup_Month
+Step 2 For each transaction, attach the customer's signup month.
+Step 3	Calculate the customer's:Purchase Month
+Then we'll compare:Signup Month → Purchase Month
+Cohort Month = customer's Signup Month
+Purchase Month = transaction's Transaction Month
+
+
+
+Retention % = (Active Customers Remaining / Original Cohort Size) × 100
+            = (X / 94) × 100
+
+A. Signup retention
+Of everyone who signed up in January, how many eventually purchased in each month?
+B. Purchase retention
+Of customers whose first purchase was in January, how many purchased again in later months
+?
+
+
+CLV note
+
+Business interpretation
+Champions → highest average customer value.
+Big Spenders → high value even with somewhat lower purchase frequency.
+Loyal Customers → strong repeat purchasing and high value.
+At Risk → moderate value but potentially important to retain.
+Lost / Low Value → lowest historical value.
+
+Sort customers by Total_Sales from highest → lowest.
+Take the top 10% of customers.
+Sum their Total_Sales.
+Divide by total customer revenue × 100
+The top 10% of customers generate about 29.66% of total revenue.
+
+Revenue concentration by RFM segment	Pareto + RFM
+Calculate:
+Each segment's % of total revenue
+You already have the segment revenues.
+Start with Champions: Champions revenue ÷ Total revenue × 100
+Champions + Big Spenders = 60.49% of total revenue.
+
+Segment opportunity
+For each segment, calculate:
+Customer % = Segment Customers ÷ Total Active Customers × 100
+
+Champions:
+16.09% of customers
+Generate 31.79% of revenue
+Average historical value = $7,515
+Lost / Low Value:
+16.09% of customers
+Generate only 3.63% of revenue
+Average historical value = $859
+
+Revenue Index = Revenue % ÷ Customer %
+
+1. Champions
+16.09% of customers
+31.79% of revenue
+Avg historical CLV: $7,515
+Revenue Index: 1.98
+Question: What should a business do with customers who generate disproportionately high revenue?
+Think about retention and relationship-building.
+2. Big Spenders
+17.24% of customers
+28.70% of revenue
+Avg historical CLV: $6,332
+Revenue Index: 1.66
+Think about how the business could increase repeat purchases or maintain their spending.
+3. Loyal Customers
+11.14% of customers
+16.72% of revenue
+Avg historical CLV: $5,713
+Revenue Index: 1.50
+Think about retention and encouraging continued purchases.
+4. At Risk
+7.97% of customers
+4.82% of revenue
+Avg historical CLV: $2,299
+These customers have meaningful historical value but are showing signs of risk.
+Think about reactivation.
+5. Lost / Low Value
+16.09% of customers
+3.63% of revenue
+Avg historical CLV: $859
+A large customer group but relatively low historical value.
+
+<<Here are strategic business recommendations for each customer segment:
+
+1. **Champions**
+* **Recommendation:** Establish a dedicated white-glove VIP experience—including early access to new product releases, exclusive high-tier loyalty perks, and direct executive-level account management—to maximize lifetime value and prevent churn among this revenue-driving core.
+
+
+2. **Big Spenders**
+* **Recommendation:** Drive higher purchase frequency through targeted cross-selling and automated personalized replenishment campaigns, converting their high per-order transaction value into predictable, recurring revenue.
+
+
+3. **Loyal Customers**
+* **Recommendation:** Deepen brand engagement by introducing tiered loyalty milestones and incentivized referral programs that reward consistent purchasing while encouraging higher average order values over time.
+
+
+4. **At Risk**
+* **Recommendation:** Deploy automated win-back workflows featuring high-value personalized offers, product recommendations based on past purchase history, and proactive satisfaction surveys to address friction before complete churn occurs.
+
+
+5. **Lost / Low Value**
+* **Recommendation:** Shift to low-cost, scalable marketing channels (such as mass email nurture sequences) to test reactivation with steep discount promotions, while capping overall acquisition and retargeting spend to optimize return on marketing investment. >>
+
